@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import 'reflect-metadata'
 import { AppDataSource } from './shared/infrastructure/database/DataSource'
 import { setupContainer } from './shared/infrastructure/container'

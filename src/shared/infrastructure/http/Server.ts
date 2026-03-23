@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import 'express-async-errors'
 import express, { Express } from 'express'
-import { apiRouter } from './Router'
+import { createApiRouter } from './Router'
 import { errorHandler } from './middlewares/errorHandler'
 import { requestLogger } from './middlewares/requestLogger'
 
@@ -20,7 +20,7 @@ export function createApp(): Express {
   app.use(requestLogger)
 
   // ── Rotas ─────────────────────────────────────────────────────────────────
-  app.use('/api', apiRouter)
+  app.use('/api', createApiRouter())
 
   // ── Tratamento de erros (deve ser o ÚLTIMO middleware) ───────────────────
   app.use(errorHandler)

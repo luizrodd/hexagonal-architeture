@@ -2,9 +2,11 @@ import { Router } from 'express'
 import { container } from 'tsyringe'
 import { MedicalRecordController } from './MedicalRecordController'
 
-const medicalRecordRouter = Router()
-const controller = container.resolve(MedicalRecordController)
+export function createMedicalRecordRouter(): Router {
+  const router = Router()
+  const controller = container.resolve(MedicalRecordController)
 
-medicalRecordRouter.post('/', (req, res) => controller.create(req, res))
+  router.post('/', (req, res) => controller.create(req, res))
 
-export { medicalRecordRouter }
+  return router
+}

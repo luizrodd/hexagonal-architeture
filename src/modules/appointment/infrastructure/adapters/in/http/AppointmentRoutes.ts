@@ -2,10 +2,12 @@ import { Router } from 'express'
 import { container } from 'tsyringe'
 import { AppointmentController } from './AppointmentController'
 
-const appointmentRouter = Router()
-const controller = container.resolve(AppointmentController)
+export function createAppointmentRouter(): Router {
+  const router = Router()
+  const controller = container.resolve(AppointmentController)
 
-appointmentRouter.post('/', (req, res) => controller.schedule(req, res))
-appointmentRouter.patch('/:id/cancel', (req, res) => controller.cancel(req, res))
+  router.post('/', (req, res) => controller.schedule(req, res))
+  router.patch('/:id/cancel', (req, res) => controller.cancel(req, res))
 
-export { appointmentRouter }
+  return router
+}

@@ -9,14 +9,16 @@ import { PatientController } from './PatientController'
  * Isso significa que todas as dependências do controller
  * (use cases, repositórios) são injetadas automaticamente.
  */
-const patientRouter = Router()
+export function createPatientRouter(): Router {
+  const router = Router()
 
-// Resolve o controller do container de DI
-const controller = container.resolve(PatientController)
+  // Resolve o controller do container de DI (lazy — após setupContainer)
+  const controller = container.resolve(PatientController)
 
-patientRouter.post('/', (req, res) => controller.register(req, res))
-patientRouter.get('/', (req, res) => controller.listAll(req, res))
-patientRouter.get('/:id', (req, res) => controller.getById(req, res))
-patientRouter.put('/:id', (req, res) => controller.update(req, res))
+  router.post('/', (req, res) => controller.register(req, res))
+  router.get('/', (req, res) => controller.listAll(req, res))
+  router.get('/:id', (req, res) => controller.getById(req, res))
+  router.put('/:id', (req, res) => controller.update(req, res))
 
-export { patientRouter }
+  return router
+}

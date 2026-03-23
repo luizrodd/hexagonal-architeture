@@ -49,7 +49,7 @@ export class PatientOrmEntity {
   @Column({ length: 50 })
   addressNumber!: string
 
-  @Column({ length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: true })
   complement!: string | null
 
   @Column({ length: 255 })
